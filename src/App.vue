@@ -1,5 +1,14 @@
 <script setup>
+import { ref } from "vue";
+
 import Hello from "./components/Hello.vue";
+
+const childData = ref("");
+const updateMessage = (data) => {
+  console.log(data);
+  childData.value = data;
+  console.log(childData);
+};
 </script>
 
 <template>
@@ -12,7 +21,9 @@ import Hello from "./components/Hello.vue";
       height="125" />
 
     <div class="wrapper">
-      <Hello msg="You did it!" />
+      <Hello @sendMessage="updateMessage" msg="You did it!" />
+      <p>メッセージ</p>
+      <p>{{ childData }}</p>
     </div>
   </header>
 

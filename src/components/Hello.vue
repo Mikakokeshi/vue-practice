@@ -34,6 +34,19 @@ const fruitsObjct = [
 // v-if = '条件' v-else
 // v-show = '条件'
 const number = 4;
+
+// emit 子から親コンポーネントにデータを渡す
+const emit = defineEmits(["sendMessage"]);
+
+const sendMessageToParent = () => {
+  const newMessage = "Hello from Child!";
+  emit("sendMessage", newMessage);
+};
+
+const count = ref(0);
+const incrementCount = () => {
+  count.value++;
+};
 </script>
 
 <template>
@@ -61,7 +74,14 @@ const number = 4;
     <p v-if="number < 3">数字は3より小さい</p>
     <p v-else>数字は3より大きい</p>
     <p v-show="number === 4">数字は4</p>
+
+    <p>カウント:{{ count }}</p>
+    <button @click="incrementCount">カウントアップ</button>
   </div>
+  <br />
+  <hr />
+  <p>emitで子から親にデータ渡す</p>
+  <button @click="sendMessageToParent">ボタン</button>
 </template>
 
 <style scoped>
